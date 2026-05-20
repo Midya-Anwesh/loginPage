@@ -8,8 +8,8 @@ export function LoginFormFooter(){
             </div>
 
             <div className='formFooterLogos'>
-                <img src={assets.apple} className='logo'/>
-                <img src={assets.google} className='logo'/>
+                <img src={assets.apple} className='logo bounceEffect squashClick'/>
+                <img src={assets.google} className='logo bounceEffect squashClick'/>
             </div>
         </ div>
     );

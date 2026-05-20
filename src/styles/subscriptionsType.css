@@ -37,6 +37,20 @@
     border: 2px solid #91CC00;
     border-radius: 20px;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.pricingOption:hover{
+    transform: translateY(-8px); 
+    
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+    
+    border-color: #a3e600; 
+
+}
+
+.subsTypeList:has(.pricingOption:hover) > .pricingOption:not(:hover) {
+    filter: blur(2px);
 }
 
 .typeDesc {
@@ -108,3 +122,4 @@
         }
     }
 }
+

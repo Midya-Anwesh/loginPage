@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
+:root{
+  --bg-color: #29281E;
+}
+
+.bounceEffect{
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.bounceEffect:hover{
+  transform: translateY(-2.5px);
+}
+
+.squashClick:active{
+  transform: translateY(2px) scale(.98);
+  background-color: var(--bg-color);
+  transition: 0.1s ease-in-out;
+}
+
+input::placeholder{
+  color: gray;
+}
+
 .separator {
   display: flex;
 }
@@ -36,9 +57,12 @@ input, select, button {
   background-color: #3E3F3A;
 }
 
-.loginForm input, select, input::placeholder, select::placeholder{
+.loginForm input, select, option{
   background-color: #3E3F3A;
   color: white;
+}
+select:has(option[value=""]:checked), option[value=""]{
+  color: gray;
 }
 
 input:-webkit-autofill{
@@ -112,7 +136,7 @@ input:-webkit-autofill{
   max-width: 402px;
   height: 48px;
   border-radius: 10px;
-  border: 1px solid;
+  border: 1px solid white;
   padding-left: 50px;
 }
 

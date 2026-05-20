@@ -1,4 +1,4 @@
-import './styles/App.css'
+import './styles/app.css'
 import './styles/header.css'
 import './styles/banner.css'
 import './styles/pricingHeader.css'

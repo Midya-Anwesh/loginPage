@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { LoginFormHeader } from './loginFormHeader';
 import { LoginFormFooter } from './loginFormFooter';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import type { inputFormData } from '../types/inputFormType';
 
 export function LoginForm(){
 
     const [inpType, toggleType] = useState("password");
-    const { register, handleSubmit, formState: {errors} } = useForm<inputFormData>({
+    const { handleSubmit, formState: {errors}, control } = useForm<inputFormData>({
         defaultValues: {
             name: "",
             email: "",
@@ -39,71 +39,111 @@ export function LoginForm(){
 
         <form className='loginFormFields' onSubmit={handleSubmit((data) => console.log(data))}>
 
-            <div className='role'>
-                <label htmlFor="roleField" className='roleLabel'> Your role </label>
-                <div className='inptWrapper'/>
-                <select {...register("role", {required: {
+            <Controller
+            name='role'
+            control={control}
+            rules={{
+                required: {
                     value: true,
                     message: "Please select a role"
-                }})} id='roleField'>
-                    <option value={""}> Select your role </option>
-                    <option value='parent'> Parent  </option> 
-                </select>
-                <p className='inputErrors'> {errors.role?.message} </p>
+                }
+            }}
+            render={
+                ({ field: { onChange, value} }) => (
+                    <div className='role'>
+                    <label htmlFor="roleField" className='roleLabel'> Your role </label>
+                    <div className='inptWrapper'/>
+                    <select id='roleField' value={value} onChange={onChange}>
+                        <option value={""}> Select your role </option>
+                        <option value='parent'> Parent  </option> 
+                    </select>
+                    <p className='inputErrors'> {errors.role?.message} </p>
+                    </div>
+                )
+            }
+            />
 
-            </div>
 
-            <div className='name'>
-                <label htmlFor="nameField" className='nameLabel'> Name </label>
-                <div className='inptWrapper' />
-                <input type='text' placeholder='Emma White' {...register("name", {
-                    required: {
-                        value: true,
-                        message: "Enter Your name"
-                    },
-                    minLength: {
-                        value: 1,
-                        message: "Enter your name"
-                    }
-                })} id="nameField"/>
-                <p className='inputErrors'> {errors.name?.message} </p>
-            </div>
+            <Controller 
+            name='name'
+            control={control}
+            rules={{
+                required: {
+                    value: true,
+                    message: "Enter your name"
+                },
+                minLength: {
+                    value: 1,
+                    message: "Name can't be empty"
+                }
+            }}
+            render={
+                ({field: {onChange, value}}) => (
+                    <div className='name'>
+                    <label htmlFor="nameField" className='nameLabel'> Name </label>
+                    <div className='inptWrapper' />
+                    <input type='text' placeholder='Emma White' id="nameField" value={value} onChange={onChange}/>
+                    <p className='inputErrors'> {errors.name?.message} </p>
+                    </div>
+                )
+            }
+            />
             
-            <div className='email'>
-                <label htmlFor="emailField" className='emailLabel'> Email </label>
-                <div className='inptWrapper'/>
-                <input type='text' {...register("email", {
-                    required: {
-                        value: true,
-                        message: "Enter your Email"
-                    },
-                    pattern: {
-                        value: new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'),
-                        message: 'Enter a valid email'
-                    }
-                })} placeholder="emm.white@gmail.com" id="emailField"/>
-                <p className='inputErrors'> {errors.email?.message} </p>
-            </div>
 
-            <div className='password'>
-                <label htmlFor="passwordField" className='passwordLabel'> Password </label>
-                <div className='inptWrapper'/>
-                <input type={inpType} {...register("password", {
-                    required: {
-                        value: true,
-                        message: "Enter your password"
-                    },
-                    validate: valdiatePassword
-                })} placeholder={'•••••••••'} id="passwordField"/>
-                <div className='togglePasswordHide' onClick={
-                    () => {
-                        toggleType( inpType === "password"? "text":"password" );
-                    }
-                }/>
-                <p className='inputErrors'> {errors.password?.message} </p>
-            </div>
+            <Controller 
+            name='email'
+            control={control}
+            rules={{
+                required: {
+                    value: true,
+                    message: 'Enter your email'
+                },
+                pattern: {
+                    value: new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'),
+                    message: 'Enter a valid email'
+                }
+            }}
+            render={
+                ({field: {onChange, value}}) => (
+                    <div className='email'>
+                    <label htmlFor="emailField" className='emailLabel'> Email </label>
+                    <div className='inptWrapper'/>
+                    <input type='text' placeholder="emm.white@gmail.com" value={value} id="emailField" onChange={onChange}/>
+                    <p className='inputErrors'> {errors.email?.message} </p>
+                </div>
+                )
+            }
+            />
 
-            <button type='submit' className='loginBtn'> Login </button>
+
+            <Controller 
+            name='password'
+            control={control}
+            rules={{
+                required: {
+                    value: true,
+                    message: 'Enter password'
+                },
+                validate: valdiatePassword
+            }}
+            render={
+                ({ field: {onChange, value} }) => (
+                    <div className='password'>
+                    <label htmlFor="passwordField" className='passwordLabel'> Password </label>
+                    <div className='inptWrapper'/>
+                    <input type={inpType}  placeholder={'•••••••••'} id="passwordField" value={value} onChange={onChange}/>
+                    <div className='togglePasswordHide' onClick={
+                        () => {
+                            toggleType( inpType === "password"? "text":"password" );
+                        }
+                    }/>
+                    <p className='inputErrors'> {errors.password?.message} </p>
+                </div>
+                )
+            }
+            />
+
+            <button type='submit' className='loginBtn bounceEffect squashClick' style={{['--bg-color' as any]: '#3E3F3A'}}> Login </button>
         </form>
 
         <LoginFormFooter />
