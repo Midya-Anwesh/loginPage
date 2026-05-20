@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.separator {
+  display: flex;
+}
+
+.separator::before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #3E3F3A;
+  max-width: 100%;
+}
+
+body{
+  background-color: #29281E;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+input, select, button {
+  font-family: inherit;
+}
+
+.loginForm {
+  font-family: Poppins;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
+  max-width: 450px;
+  height: auto;
+  border-radius: 10px;
+  padding: 24px;
+  background-color: #3E3F3A;
+}
+
+.loginForm input, select, input::placeholder, select::placeholder{
+  background-color: #3E3F3A;
+  color: white;
+}
+
+input:-webkit-autofill{
+  -webkit-box-shadow: 0 0 0 1000px #3E3F3A inset;
+  -webkit-text-fill-color: white;
+}
+
+.nameLabel, .emailLabel, .passwordLabel, .roleLabel{
+  color: white;
+}
+
+.formHeader {
+  max-width: 402px;
+  max-height: 94px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.formHeader > p{
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: white;
+}
+
+.important {
+  display: flex;
+  max-width: 402px;
+  max-height: 24px;
+  column-gap: 8px;
+  align-items: center;
+}
+
+.important p{
+  height: 17px;
+  opacity: 1;
+
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
+  color: yellow;
+
+}
+
+.formHeaderImg {
+  max-width: 24px;
+  max-height: 22.92px;
+}
+
+
+.loginFormFields{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.role, .name, .password, .email{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  max-width: 402px;
+  gap: 8px;
+}
+
+#roleField, #nameField, #passwordField, #emailField{
+  max-width: 402px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid;
+  padding-left: 50px;
+}
+
+.inptWrapper {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  top: 43px;
+  left: 19px
+}
+
+.loginBtn{
+  max-width: 402px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid black;
+  color: black;
+  background-color: #91CC00;
+}
+
+#roleField{
+  padding-left: 19px;
+  appearance: none;
+}
+
+.role .inptWrapper{
+  background-image: url(@assets/down-arrow.png);
+  left: calc(100% - 35px);
+}
+
+.name .inptWrapper{
+  background-image: url('@assets/person.png');
+}
+
+.email .inptWrapper{
+  background-image: url('@assets/email.png');
+}
+
+.password .inptWrapper{
+  background-image: url('@assets/lock.png');
+}
+
+.inputErrors{
+  color: red;
+  height: 12px;
+  margin: 0;
+}
+
+.togglePasswordHide{
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  right: 19px;
+  bottom: 31px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+}
+
+#passwordField[type='password'] + div {
+  background-image: url('@assets/hide-icon.png');
+}
+
+#passwordField[type='text'] + div {
+  background-image: url('@assets/show-password.png');
+}
+
+.formFooter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .formFooterHeading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 16px;
+  }
+
+  .formFooterHeading p {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: white;
+  }
+
+  .formFooterHeading::before{
+    content: '';
+    flex: 1;
+    max-width: 43%;
+    height: 0.75px;
+    background-color: #464646;
+  }
+
+  .formFooterHeading::after{
+    content: '';
+    flex: 1;
+    max-width: 43%;
+    height: 0.75px;
+    background-color: #464646;
+  }
+}
+
+.formFooterLogos{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 120px;
+  max-height: 48px;
+  column-gap: 24px;
+  align-items: center;
+}
+
+.logo{
+  max-width: 48px;
+  max-height: 48px;
+  border-radius: 12px;
+}
+
+
+/* Login Advisory */
+.loginAdvisory {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  color: white;
+}
+
+.advisoryTitle{
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: 0%;
+  margin: 0;
+}
+
+.advisoryList {
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding-left: 0;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 28px;
+  flex-wrap: wrap;
+
+}
+
+.advisoryList > li{
+  background-image: url('@assets/tickMark.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 24px 28px;
+  padding-left: 29px;
+  line-height: 28px;
+}
+
+.loginPage{
+  display: grid;
+  padding: clamp(20px, 5vw, 120px);
+  gap: 72px;
+  align-items: center;
+}
+
+.loginDiv{
+  display: flex;
+  justify-content: center;
+  column-gap: clamp(20px, 5vw, 120px);
+}
+
+@media screen and (width < 920px) {
+  .loginDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

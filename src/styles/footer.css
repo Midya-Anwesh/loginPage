@@ -1,0 +1,21 @@
+.pageFooter{
+    font-family: Poppings;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0%;
+    text-align: center;
+    gap: 64px;
+
+
+    a:link{
+        color: #91CC00;
+        text-decoration: underline;
+        text-decoration-style: solid;
+    }
+}

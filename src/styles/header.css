@@ -1,0 +1,13 @@
+.loginHeader {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.headerLogo {
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    max-height: 77.54px;
+    margin-bottom: 72px;
+}

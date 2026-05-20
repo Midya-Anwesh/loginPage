@@ -1,0 +1,110 @@
+.pricingContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.subsTypeList{
+    width: 100%;
+    max-width: 1280px;
+
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+
+    img{
+        width: 24px;
+        height: 24px;
+        margin: 0;
+    }
+}
+
+.pricingOption {
+    font-family: Poppins;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    width: 100%;
+    max-width: 410.67px;
+    height: 317px;
+    color: white;
+    border: 2px solid #91CC00;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.typeDesc {
+    max-width: 410.67px;
+    max-height: 150px;
+    background-color: #3E3F3A;
+    padding: 24px;
+    border-radius: 20px 20px 0 0;
+}
+
+.subPricing {
+    position: relative;
+    max-width: 410.67px;
+    max-height: 119px;
+    display: flex;
+    flex-direction: column;
+
+    #monthlyBilling {
+        width: 100%;
+        max-width: 167px;
+        height: 30px;
+        display: flex;
+        column-gap: 12px;
+        padding-left: 12px;
+    }
+
+    .separator {
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        width: 100%;
+    }
+
+    .separator::before{
+        content: "";
+        flex: 1;
+        background-color: #3E3F3A;
+        max-width: 45%;
+        height: 0.75px;
+    }
+
+    .separator::after{
+        content: "";
+        flex: 1;
+        background-color: #3E3F3A;
+        max-width: 45%;
+        height: 0.75px;
+    }
+
+    #yearlyBilling{
+        display: flex;
+        position: relative;
+        padding-left: 12px;
+        padding-top: 20px;
+        column-gap: 12px;
+
+        #savings{
+            position: absolute;
+            right: 10px;
+            width: 147px;
+            height: 33px;
+            padding: 6px 12px;
+            background-color: #3E3F3A;
+            border-radius: 34px;
+            text-wrap: wrap;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 14px;
+        }
+    }
+}
