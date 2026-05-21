@@ -14,8 +14,15 @@
 
 
     a:link{
-        color: #91CC00;
         text-decoration: underline;
         text-decoration-style: solid;
+    }
+
+    a:link, a:visited, a:active{
+        color: #91CC00;
+    }
+
+    a{
+        margin: 0 0.35rem;
     }
 }

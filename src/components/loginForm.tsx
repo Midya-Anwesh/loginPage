@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { LoginFormHeader } from './loginFormHeader';
 import { LoginFormFooter } from './loginFormFooter';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import type { inputFormData } from '../types/inputFormType';
+import { CustomInput } from './customInput';
 
 export function LoginForm(){
 
-    const [inpType, toggleType] = useState("password");
-    const { handleSubmit, formState: {errors}, control } = useForm<inputFormData>({
+    const [inpType, toggleType] = useState<"password"|"text">("password");
+    const { handleSubmit, formState: {errors}, control, reset } = useForm<inputFormData>({
         defaultValues: {
             name: "",
             email: "",
@@ -30,6 +31,11 @@ export function LoginForm(){
         return true;
     }
 
+    const onSubmit = (data: inputFormData) => {
+        console.log(data);
+        reset();
+    }
+
     return(
         <>
 
@@ -37,36 +43,44 @@ export function LoginForm(){
 
         <LoginFormHeader />
 
-        <form className='loginFormFields' onSubmit={handleSubmit((data) => console.log(data))}>
+        <form className='loginFormFields' onSubmit={handleSubmit(onSubmit)}>
 
-            <Controller
-            name='role'
+            <CustomInput 
             control={control}
+            name='role'
+            errors={errors}
+            className='role'
+            fieldId='roleField'
+            labelClass='roleLabel'
+            label='Your Role'
             rules={{
                 required: {
                     value: true,
                     message: "Please select a role"
                 }
             }}
-            render={
-                ({ field: { onChange, value} }) => (
-                    <div className='role'>
-                    <label htmlFor="roleField" className='roleLabel'> Your role </label>
-                    <div className='inptWrapper'/>
-                    <select id='roleField' value={value} onChange={onChange}>
-                        <option value={""}> Select your role </option>
-                        <option value='parent'> Parent  </option> 
-                    </select>
-                    <p className='inputErrors'> {errors.role?.message} </p>
-                    </div>
-                )
-            }
+            options={[
+                {
+                    key: 'Select your role',
+                    value: ''
+                },
+                {
+                    key: 'Parent',
+                    value: 'parent'
+                }
+            ]}
             />
 
-
-            <Controller 
-            name='name'
+            <CustomInput 
             control={control}
+            name='name'
+            className='name'
+            fieldId='nameField'
+            placeholder='Emma White'
+            labelClass='nameLabel'
+            label='Name'
+            errors={errors}
+            type='text'
             rules={{
                 required: {
                     value: true,
@@ -77,22 +91,18 @@ export function LoginForm(){
                     message: "Name can't be empty"
                 }
             }}
-            render={
-                ({field: {onChange, value}}) => (
-                    <div className='name'>
-                    <label htmlFor="nameField" className='nameLabel'> Name </label>
-                    <div className='inptWrapper' />
-                    <input type='text' placeholder='Emma White' id="nameField" value={value} onChange={onChange}/>
-                    <p className='inputErrors'> {errors.name?.message} </p>
-                    </div>
-                )
-            }
             />
-            
 
-            <Controller 
-            name='email'
+            <CustomInput 
             control={control}
+            name='email'
+            className='email'
+            fieldId='emailField'
+            placeholder='emm.white@gmail.com'
+            labelClass='emailLabel'
+            label='Email'
+            type='text'
+            errors={errors}
             rules={{
                 required: {
                     value: true,
@@ -103,22 +113,18 @@ export function LoginForm(){
                     message: 'Enter a valid email'
                 }
             }}
-            render={
-                ({field: {onChange, value}}) => (
-                    <div className='email'>
-                    <label htmlFor="emailField" className='emailLabel'> Email </label>
-                    <div className='inptWrapper'/>
-                    <input type='text' placeholder="emm.white@gmail.com" value={value} id="emailField" onChange={onChange}/>
-                    <p className='inputErrors'> {errors.email?.message} </p>
-                </div>
-                )
-            }
             />
 
-
-            <Controller 
-            name='password'
+            <CustomInput 
             control={control}
+            name='password'
+            className='password'
+            fieldId='passwordField'
+            placeholder='•••••••••'
+            labelClass='passwordLabel'
+            label='Password'
+            type={inpType}
+            errors={errors}
             rules={{
                 required: {
                     value: true,
@@ -126,24 +132,21 @@ export function LoginForm(){
                 },
                 validate: valdiatePassword
             }}
-            render={
-                ({ field: {onChange, value} }) => (
-                    <div className='password'>
-                    <label htmlFor="passwordField" className='passwordLabel'> Password </label>
-                    <div className='inptWrapper'/>
-                    <input type={inpType}  placeholder={'•••••••••'} id="passwordField" value={value} onChange={onChange}/>
-                    <div className='togglePasswordHide' onClick={
-                        () => {
-                            toggleType( inpType === "password"? "text":"password" );
-                        }
-                    }/>
-                    <p className='inputErrors'> {errors.password?.message} </p>
-                </div>
-                )
+            
+            BeforeError={
+                () => {
+                    return (
+                        <div className='togglePasswordHide' onClick={
+                            () => {
+                                toggleType( inpType === "password"? "text":"password" );
+                            }
+                        }/>
+                    )
+                }
             }
             />
 
-            <button type='submit' className='loginBtn bounceEffect squashClick' style={{['--bg-color' as any]: '#3E3F3A'}}> Login </button>
+            <button type='submit' className='loginBtn bounceEffect squashClick'> Login </button>
         </form>
 
         <LoginFormFooter />
