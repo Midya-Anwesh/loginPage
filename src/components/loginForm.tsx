@@ -4,6 +4,8 @@ import { LoginFormFooter } from './loginFormFooter';
 import { useForm } from 'react-hook-form';
 import type { inputFormData } from '../types/inputFormType';
 import { CustomInput } from './customInput';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { formSchema } from '../schema';
 
 export function LoginForm(){
 
@@ -14,22 +16,9 @@ export function LoginForm(){
             email: "",
             password: "",
             role: ""
-        }
+        },
+        resolver: yupResolver(formSchema)
     });
-
-    const valdiatePassword = (password: string) => {
-        if (password.length < 6){
-            return "Password must be atleast 6 digits";
-        }
-        const hasSpecial = /[^a-zA-Z0-9 ]/.test(password);
-        const alphaNumeric = /[^a-zA-Z0-9 ]/.test(password);
-
-        if (! (hasSpecial && alphaNumeric)){
-            return "Invalid password";
-        }
-        
-        return true;
-    }
 
     const onSubmit = (data: inputFormData) => {
         console.log(data);
@@ -53,12 +42,6 @@ export function LoginForm(){
             fieldId='roleField'
             labelClass='roleLabel'
             label='Your Role'
-            rules={{
-                required: {
-                    value: true,
-                    message: "Please select a role"
-                }
-            }}
             options={[
                 {
                     key: 'Select your role',
@@ -81,16 +64,6 @@ export function LoginForm(){
             label='Name'
             errors={errors}
             type='text'
-            rules={{
-                required: {
-                    value: true,
-                    message: "Enter your name"
-                },
-                minLength: {
-                    value: 1,
-                    message: "Name can't be empty"
-                }
-            }}
             />
 
             <CustomInput 
@@ -103,16 +76,6 @@ export function LoginForm(){
             label='Email'
             type='text'
             errors={errors}
-            rules={{
-                required: {
-                    value: true,
-                    message: 'Enter your email'
-                },
-                pattern: {
-                    value: new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'),
-                    message: 'Enter a valid email'
-                }
-            }}
             />
 
             <CustomInput 
@@ -125,13 +88,6 @@ export function LoginForm(){
             label='Password'
             type={inpType}
             errors={errors}
-            rules={{
-                required: {
-                    value: true,
-                    message: 'Enter password'
-                },
-                validate: valdiatePassword
-            }}
             
             BeforeError={
                 () => {
