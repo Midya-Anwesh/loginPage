@@ -1,0 +1,301 @@
+.jounalPage{
+    font-family: Poppins;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 19px clamp(20px, 5vw, 70px);
+}
+
+.journalHeader{
+    display: flex;
+    width: 100%;
+    max-height: 36px;
+    justify-content: space-between;
+    align-items: center;
+
+    .pageName{
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 24px;
+        line-height: 100%;
+    }
+
+    .breadCrumbList{
+        color: var(--text-color) !important;
+    }
+}
+
+.journalDatePicker{
+    display: flex;
+    gap: 12px;
+    background-color: var(--journal-date-picker-bg);
+    min-height: 40px;
+    max-width: 230px;
+    padding-left: 12px;
+    padding-right: 12px;
+    align-items: center;
+    border-radius: 6px;
+
+    .calenderLogo{
+        width: 24px;
+        height: 24px;
+    }
+
+    .calenderSeparator{
+        background-color: var(--journal-page-calender-separator);
+    }
+}
+
+.matchCardsContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+@media screen and (width < 700px) {
+    .matchCardsContainer{
+        grid-template-columns: 1fr;
+    }
+}
+
+.matchCard{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--journal-match-card-bg);
+    border-radius: 5px;
+
+    height: fit-content;
+
+    .separator::before{
+        background-color: var(--match-card-separator);
+    }
+
+    .matchCardHeader{
+        display: flex;
+        justify-content: space-between;
+        padding: 24px;
+    }
+
+    .playerInfo{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .matchStats{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 60px;
+    }
+
+    .matchResultContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+        .result{
+            color: var(--win-color);
+        }
+    }
+
+    .matchSetsContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+        .sets{
+            color: var(--match-set-color)
+        }
+    }
+
+    .questionsContainer{
+        display: flex;
+        flex-direction: column;
+
+        .separator::before{
+            background-color: var(--question-separator);
+        }
+
+        .questionContent{
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 24px;
+            gap: 30px;
+
+            .score{
+                position: relative;
+                border-radius: 70%;
+                min-width: 24px;
+                min-height: 24px;
+                max-width: 24px;
+                max-height: 24px;
+                background-color: var(--question-score-bg);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
+.commentSection{
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 15px;
+
+    .coachInfo{
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+
+        .coachAvatar{
+            background-color: var(--coach-badge-bg);
+            color: var(--coach-badge-text);
+            width: 28px;
+            height: 28px;
+        }
+    }
+}
+
+.commentForm{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.commentHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentContent{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.commentInputWrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.commentInputWrapper textarea,
+.sendMsgBadge, .commentInput {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.commentInput textarea {
+    min-height: 48px;
+    background-color: var(--comment-input-bg);
+    border-radius: 10px;
+    border: 2px var(--msg-input-border) solid;
+    padding-right: 45px;
+    width: 100%;
+}
+
+textarea{
+    position: relative;
+}
+
+textarea::placeholder{
+    position: absolute;
+    top:30%;
+}
+
+.sendMsgBadge {
+    align-self: end;
+    justify-self: right;
+
+    border-radius: 50%;
+
+    margin-bottom: 20px;
+    margin-right: 15px;
+
+    background-color: var(--send-msg-badge);
+    width: 35px !important;
+    height: 35px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.sendMsgLogo{
+    width: 14px;
+    height: 14px;
+}
+
+
+.commentInputWrapper:has(textarea:focus:not(:placeholder-shown)) > .sendMsgBadge{
+    background-color: var(--arrow-active);
+}
+
+.editDeleteOption{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 23px;
+}
+
+.editIcon, .deleteIcon{
+    height: 20px;
+    width: 20px;
+    margin: 0;
+    cursor: pointer;
+    border: none;
+}
+
+
+
+.commentCard{
+    font-family: Poppins;
+    background-color: var(--comment-card-bg);
+    color: var(--text-color);
+}
+
+.commentCardHeader{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.commentCardTitle{
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+
+    font-weight: 500;
+    font-size: 16px;
+    font-style: Medium;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    .commentTimeStamp{
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0%;
+
+    }
+}
+
+.commentDesc{
+    color: var(--text-color);
+    padding: 10px;
+    padding-left: 33px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+}

@@ -1,0 +1,31 @@
+.profileDropdown{
+    font-family: Poppins;
+    min-width: 222px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;    
+}
+
+.dropdownGroup{
+    font-family: Poppins;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profileOptionsStyle, .dropdownGroup span {
+    font-weight: 400;
+    font-size: 15px;
+
+}
+
+.dropDownGroupLabel{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.dropdownItemIcon{
+    width: 20px;
+    margin: 0;
+}

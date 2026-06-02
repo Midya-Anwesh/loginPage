@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 :root{
-  --bg-color: #29281E;
-  -webkit-link: #91CC00;
+  --bg-color: var('--background-color');
+  -webkit-link: var('--webkit-link');
 }
 
 .bounceEffect{
@@ -14,12 +14,12 @@
 
 .squashClick:active{
   transform: translateY(2px) scale(.98);
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   transition: 0.1s ease-in-out;
 }
 
 input::placeholder{
-  color: gray;
+  color: var(--input-placeholder);
 }
 
 .separator {
@@ -30,12 +30,12 @@ input::placeholder{
   content: "";
   flex: 1;
   height: 1px;
-  background-color: #3E3F3A;
+  background-color: var(--dark-separator);
   max-width: 100%;
 }
 
 body{
-  background-color: #29281E;
+  background-color: var(--background-color);
 }
 
 *, *::before, *::after {
@@ -52,27 +52,27 @@ input, select, button {
   grid-template-rows: auto 1fr auto;
   gap: 24px;
   max-width: 450px;
-  height: auto;
+  height: fit-content;
   border-radius: 10px;
   padding: 24px;
-  background-color: #3E3F3A;
+  background-color: var(--login-form-color);
 }
 
 .loginForm input, select, option{
-  background-color: #3E3F3A;
-  color: white;
+  background-color: var(--login-form-color);
+  color: var(--text-color);
 }
 select:has(option[value=""]:checked), option[value=""]{
-  color: gray;
+  color: var(--input-placeholder);
 }
 
 input:-webkit-autofill{
-  -webkit-box-shadow: 0 0 0 1000px #3E3F3A inset;
-  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0 1000px var(--login-form-color) inset;
+  -webkit-text-fill-color: var(--text-color);
 }
 
 .nameLabel, .emailLabel, .passwordLabel, .roleLabel{
-  color: white;
+  color: var(--text-color);
 }
 
 .formHeader {
@@ -80,6 +80,7 @@ input:-webkit-autofill{
   max-height: 94px;
   display: grid;
   grid-template-columns: 1fr;
+  row-gap: 16px;
 }
 
 .formHeader > p{
@@ -88,7 +89,7 @@ input:-webkit-autofill{
   font-size: 20px;
   line-height: 100%;
   letter-spacing: 0%;
-  color: white;
+  color: var(--text-color);
 }
 
 .important {
@@ -99,7 +100,7 @@ input:-webkit-autofill{
   align-items: center;
 }
 
-.important p{
+.important p{ 
   height: 17px;
   opacity: 1;
 
@@ -109,7 +110,7 @@ input:-webkit-autofill{
   line-height: 100%;
   letter-spacing: 0%;
 
-  color: yellow;
+  color: var(--caution);
 
 }
 
@@ -137,7 +138,7 @@ input:-webkit-autofill{
   max-width: 402px;
   height: 48px;
   border-radius: 10px;
-  border: 1px solid white;
+  border: 1px solid var(--text-color);
   padding-left: 50px;
 }
 
@@ -155,9 +156,9 @@ input:-webkit-autofill{
   max-width: 402px;
   height: 48px;
   border-radius: 10px;
-  border: 1px solid black;
-  color: black;
-  background-color: #91CC00;
+  border: 1px solid var(--login-btn-text-color);
+  color: var(--login-btn-text-color);
+  background-color: var(--login-btn-bg-color);
 }
 
 #roleField{
@@ -183,8 +184,9 @@ input:-webkit-autofill{
 }
 
 .inputErrors{
-  color: red;
+  color: var(--error-msg-color);
   height: 12px;
+  font-size: 15px;
   margin: 0;
 }
 
@@ -193,7 +195,7 @@ input:-webkit-autofill{
   height: 24px;
   width: 24px;
   right: 19px;
-  bottom: 31px;
+  bottom: 32px;
   background-size: 24px 24px;
   background-repeat: no-repeat;
 }
@@ -225,7 +227,7 @@ input:-webkit-autofill{
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0%;
-    color: white;
+    color: var(--text-color);
   }
 
   .formFooterHeading::before{
@@ -233,7 +235,7 @@ input:-webkit-autofill{
     flex: 1;
     max-width: 43%;
     height: 0.75px;
-    background-color: #464646;
+    background-color: var(--login-form-footer-separator);
   }
 
   .formFooterHeading::after{
@@ -241,7 +243,7 @@ input:-webkit-autofill{
     flex: 1;
     max-width: 43%;
     height: 0.75px;
-    background-color: #464646;
+    background-color: var(--login-form-footer-separator);
   }
 }
 
@@ -267,7 +269,7 @@ input:-webkit-autofill{
   display: flex;
   flex-direction: column;
   gap: 36px;
-  color: white;
+  color: var(--text-color);
 }
 
 .advisoryTitle{
@@ -321,5 +323,25 @@ input:-webkit-autofill{
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: 16px;
   }
+}
+
+@keyframes spin-3d {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.logo-container {
+  /* Lower numbers mean a more intense 3D effect */
+  perspective: 1000px; 
+}
+
+.spin-3d:hover {
+  animation: spin-3d 2s ease-in-out 1 forwards;
+  transform-style: preserve-3d;
 }

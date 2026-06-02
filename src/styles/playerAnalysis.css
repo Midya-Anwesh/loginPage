@@ -1,0 +1,229 @@
+.analysisDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.analytixContainer{
+    font-family: Poppins;
+    color: var(--text-color);
+    padding: 19px clamp(20px, 5vw, 70px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+}
+
+.breadCrumb{
+    font-family: inherit;
+    color: inherit;
+}
+
+.basicDet{
+    display: flex;
+    justify-content: space-between;
+
+    span{
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 18px;
+        line-height: 100%;
+        text-transform: uppercase;
+
+    }
+}
+
+.analysisHeader{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 6px;
+}
+
+.dateRange{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: var(--date-range-bg-color);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.datePickerArrow{
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.dateRange:has(button[data-state='open']) > .datePickerArrow{
+    transform: rotate(180deg);
+}
+
+.btnGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.goals, .ratioBox{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(291px, 1fr));
+    gap: 40px;
+    margin-top: 6px;
+}
+
+.goalsHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.goalInfo{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--goalinfo-bg-color);
+    padding: 20px;
+    border-radius: 6px;
+    gap: 16px;
+}
+
+.goalType{
+    display: flex;
+    justify-items: center;
+    gap: 8px;
+}
+
+.goalLogo{
+    width: 24px;
+    height: 24px;
+}
+
+.goalsBody{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.bodyContent{
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.goalProgressBar{
+    height: clamp(20px, 5vw, 30px);
+    border-radius: 6px;
+    background-color: var(--progress-bar-bg-color);
+}
+
+.goalProgressBar > [data-state]{
+    background-color: var(--progress-bar-active-state);
+}
+
+.toggleGroup, .toggleStat, .toggle:hover, .toggleStat > [data-state='on']{
+    border-radius: 3px;
+}
+
+.toggleGroup{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;    
+    margin: 0;
+    overflow: hidden;
+}
+
+.toggleStat{
+    background-color: var(--toggle-btn-bg);
+}
+
+.toggleStat > [data-state='on']{
+    color: var(--text-color);
+    background-color: var(--toggle-btn-hover);
+}
+
+.toggle:hover{
+    color: var(--toggle-btn-hover);
+    background-color: var(--text-color);
+}
+
+.ratioBoxContent{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--ratiobox-bg);
+    border-radius: 6px;
+    padding: 16px;
+
+    min-width: 0;
+}
+
+.progressBarHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ratioBoxHeader{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ratioTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    height: clamp(20px, 5vh, 35px);
+}
+
+.ratioProgressBar{
+    flex: 1 1 0%;
+    height: clamp(10px, 5vh, 17px);
+    background-color: var(--loss-color);
+    [data-state]{
+        background-color: var(--win-color);
+        border-radius: 3px;
+    }
+    border-radius: 3px;
+}
+
+.progressBarContent{
+    display: flex;
+    gap: clamp(10px, 5vw, 20px);
+    justify-content: center;
+    align-items: center;
+}
+
+.matchResults{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.winLossBadge{
+    display: flex;
+    gap: 5px;
+}
+
+.winBadge, .lossBadge {
+    display: flex;
+    align-items: center;
+    height: 25px;
+    border-radius: 8px;
+    max-width: 45px;
+    span{
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 13px;
+    }
+}
+
+.winBadge{
+    background-color: var(--win-color);
+}
+
+.lossBadge{
+    background-color: var(--loss-color);
+}

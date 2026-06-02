@@ -1,0 +1,29 @@
+.dashboardHeader{
+    max-height: 80px;
+    display: flex;
+    padding: 19px clamp(20px, 5vw, 70px);
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--dashboard-bg-color);
+}
+
+.dashboardLogo{
+    max-width: 247px;
+    max-height: 48px;
+}
+
+.dashboardBadge{
+    height: clamp(40px, 5vh, 44px);
+    max-width: 177px;
+    max-height: 44px;
+}
+
+@media screen and (width < 400px) {
+    .dashboardHeader{
+        flex-wrap: wrap;
+        max-height: 200px;
+        gap: 16px;
+        justify-content: center;
+    }
+}

@@ -1,20 +1,27 @@
-import { Controller } from "react-hook-form";
-import type { customInputType } from "../types/customInputType";
+import { Controller, type FieldValues } from "react-hook-form";
+import type { customInputType } from "../types/customInput.type";
+import { Textarea } from "./ui/textarea";
 
-export function CustomInput({ name, control, rules, className, errors, labelClass, label, fieldId, placeholder, type, logoClass, errorClass, options, BeforeError }: customInputType){
+export function CustomInput<T extends FieldValues>({ name, control, rules, className, fieldChildren, labelClass, label, fieldId, placeholder, type, logoClass, errorClass, options, BeforeError }: customInputType<T>){
     return (
+        <div className={className}>
+        {label && <label htmlFor={fieldId} className={labelClass}> { label } </label>} 
         <Controller 
         name={name}
         control={control}
         rules={rules}
         render={
-            ({ field: {onChange, value} }) => (
-                <div className={className}>
-                    <label htmlFor={fieldId} className={labelClass}> {label} </label>
+            ({ field: {onChange, value}, fieldState: {error} }) => (
+                <>
                     <div className={logoClass ?? 'inptWrapper'} />
 
                     {
-                    type &&
+                        type && type === 'textarea' &&
+                        <Textarea className="break-all" placeholder={placeholder} id={fieldId} value={value} onChange={onChange} children={fieldChildren}/>
+                    }
+
+                    {
+                    type && type!== 'textarea' &&
                     <input type={type} placeholder={placeholder} id={fieldId} value={value} onChange={onChange}/>
                     }
 
@@ -32,10 +39,11 @@ export function CustomInput({ name, control, rules, className, errors, labelClas
                         </>
                     }
                     { BeforeError && <BeforeError /> }
-                    <p className={errorClass ?? 'inputErrors'}> {errors[name]?.message} </p>
-                </div>
+                    <p className={`${errorClass ?? 'inputErrors'}`}> {error?.message} </p>
+                </>
             )
         }
         />
+        </div>
     )
 }

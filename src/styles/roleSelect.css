@@ -1,0 +1,104 @@
+.roleSelectContainer{
+    width: fit-content !important;
+    /* max-width: 500px !important; */
+    max-width: clamp(300px, 70vw, 500px) !important;
+    display: flex;
+    flex-direction: column;
+    font-family: Poppins;
+    background-color: var(--role-select-bg);
+    color: var(--text-color);
+    padding: 24px;
+    gap: 24px;
+}
+
+.roleLogo{
+    width: 48px;
+    height: 48px;
+}
+
+.headerDescContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.roleSelectHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;  
+}
+
+.roleSelectDesc{
+    color: var(--text-color);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.roleSelectItemGrp{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: start;
+}
+
+.roleToggleItem{
+    display: flex;
+    width: 100%;
+    max-width: 210px;
+    gap: 12px;
+    justify-content: start;
+    background-color: var(--role-select-bg);
+    min-height: 64px;
+    min-width: 200px;
+    border-radius: 10px;
+    background-color: var(--role-toggle-bg);
+
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+@media screen and (width < 950px) {
+    .roleSelectItemGrp{
+        flex-wrap: wrap;
+    }
+
+    .roleToggleItem{
+        max-width: 100%;
+    }
+}
+
+.roleToggleItem[data-state='on']{
+    background-color: var(--role-toggle-active);
+}
+
+.roleToggleItem:hover{
+    color: var(--text-color);
+}
+
+.roleSubmitDiv{
+    display: flex;
+    justify-content: start;
+}
+
+.selectRoleBtn{
+    min-height: 37px;
+    min-width: 97px;
+    background-color: var(--role-select-btn-color);
+    border-radius: 6px;
+
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    text-align: center;
+
+}

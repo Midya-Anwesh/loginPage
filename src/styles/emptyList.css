@@ -1,0 +1,42 @@
+.emptyContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: clamp(100px, 13vh, 390px);
+    margin-bottom: clamp(100px, 13vh, 390px);
+}
+
+.emptyList{
+    font-family: Poppins;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 32px;
+    width: clamp(100px, 40vw, 640px);
+    height: clamp(50px, 30vh, 241px);
+}
+
+.emptyListLogo{
+    width: clamp(20px, 20vw, 120px);
+    height: clamp(20px, 20vh, 120px);
+}
+
+.emptyListContent{
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.emptyListTitle{
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.emptyListDesc{
+    font-weight: 300px;
+    font-size: 19px;
+    color: var(--text-color);
+}

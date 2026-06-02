@@ -8,7 +8,7 @@
     font-family: Poppins;
 
     #pricing, #instruction {
-        color: white;
+        color: var(--text-color);
     }
 
 
@@ -24,7 +24,7 @@
         flex: 1;
         max-width: 41%;
         height: 0.75px;
-        background-color: #3E3F3A;
+        background-color: var(--dark-separator);
     }
 
     #instruction::after {
@@ -32,6 +32,6 @@
         flex: 1;
         max-width: 41%;
         height: 0.75px;
-        background-color: #3E3F3A;
+        background-color: var(--dark-separator)
     }
 }
