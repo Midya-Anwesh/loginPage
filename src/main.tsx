@@ -1,10 +1,14 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/index.css'
-import App from './App.tsx'
+import { routes } from './routes/routes';
+import { createBrowserRouter, RouterProvider } from 'react-router'
+
+import { addColors } from './constants/colors';
+
+const browserRoutes = createBrowserRouter(routes);
+
+addColors();
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <RouterProvider router={browserRoutes}/>
 )

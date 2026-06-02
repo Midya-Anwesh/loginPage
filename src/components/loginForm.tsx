@@ -1,28 +1,49 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { LoginFormHeader } from './loginFormHeader';
 import { LoginFormFooter } from './loginFormFooter';
 import { useForm } from 'react-hook-form';
-import type { inputFormData } from '../types/inputFormType';
+import type { inputFormData } from '../types/inputForm.type';
 import { CustomInput } from './customInput';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { formSchema } from '../schema';
+import { loginFormSchema } from '../validation/loginForm.schema';
+import { useNavigate, type ActionFunctionArgs } from 'react-router';
+
+
+export const LoginFormAction = ({ request }: ActionFunctionArgs) => {
+    return request.formData();
+}
 
 export function LoginForm(){
 
+    const naviagte = useNavigate();
     const [inpType, toggleType] = useState<"password"|"text">("password");
-    const { handleSubmit, formState: {errors}, control, reset } = useForm<inputFormData>({
+    const { handleSubmit, formState: {errors}, control } = useForm<inputFormData>({
         defaultValues: {
             name: "",
             email: "",
             password: "",
             role: ""
         },
-        resolver: yupResolver(formSchema)
+        resolver: yupResolver(loginFormSchema)
     });
 
+    const roleOptions = useMemo(() => {
+        return [
+            {
+                key: 'Select your role',
+                value: ''
+            },
+            {
+                key: 'Parent',
+                value: 'parent'
+            }
+        ]
+    }, []);
+    
+
     const onSubmit = (data: inputFormData) => {
-        console.log(data);
-        reset();
+        localStorage.setItem('user', JSON.stringify(data));
+        naviagte('/dashboard');
     }
 
     return(
@@ -34,7 +55,7 @@ export function LoginForm(){
 
         <form className='loginFormFields' onSubmit={handleSubmit(onSubmit)}>
 
-            <CustomInput 
+            <CustomInput  
             control={control}
             name='role'
             errors={errors}
@@ -42,16 +63,7 @@ export function LoginForm(){
             fieldId='roleField'
             labelClass='roleLabel'
             label='Your Role'
-            options={[
-                {
-                    key: 'Select your role',
-                    value: ''
-                },
-                {
-                    key: 'Parent',
-                    value: 'parent'
-                }
-            ]}
+            options={roleOptions}
             />
 
             <CustomInput 

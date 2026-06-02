@@ -4,7 +4,7 @@ import './styles/banner.css'
 import './styles/pricingHeader.css'
 import './styles/subscriptionsType.css'
 import './styles/footer.css'
-import { LoginPage } from './pages/loginPage';
+import { LoginPage } from './pages/login.page';
 
 function App() {
   return (

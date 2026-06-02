@@ -1,0 +1,16 @@
+.datePickerPopOver{
+    background: transparent;
+}
+
+.datePickerPopoverContent{
+    background: transparent;
+}
+
+.datePickerCalendar{
+    font-family: Poppins;
+    position: fixed;
+    margin: 0;
+    background-color: var(--datepicker-calendar-bg-color);
+    color: white;
+}
+

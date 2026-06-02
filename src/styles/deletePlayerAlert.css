@@ -1,0 +1,73 @@
+.alertContent{
+    font-family: Poppins;
+    min-width: 300px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    padding: 30px;
+}
+
+.deleteAlertHeader{
+    min-width: 100%;
+    /* width: fit-content; */
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+
+.deleteAlertTitle{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    span{
+        color: var(--delete-alert-text-color) ;
+        font-weight: 500;
+        font-size: 20px; 
+        font-family: Poppins;
+    }
+}
+
+.deleteActions{
+    display: flex;
+    justify-content: right;
+}
+
+.deletAlertAccept{
+    max-width: 137px;
+    max-height: 37px;
+    background-color: var(--delete-alert-acc-btn-bg-color);
+    color: var(--text-color);
+}
+
+
+.alertMedia{
+    width: 100%;
+    min-height: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.alertMediaImg{
+    width: clamp(200px, 40vw, 290px);
+    min-height: 55px;
+    margin: 0;
+}
+
+.alertDesc{
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0%;
+    text-align: center;
+    color: var(--text-color);
+}
+
+@media screen and (width < 500px) {
+    .alertDesc{
+        font-weight: 200;
+        font-size: 13px;
+        line-height: 18px;
+    }
+}

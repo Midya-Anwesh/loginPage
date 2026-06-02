@@ -21,7 +21,7 @@
     max-width: 101.59px;
     max-height: 101.59px;
     border-radius: 50%;
-    background-color: #000000BF;
+    background-color: var(--black-circle-div);
 }
 
 .playArrow{
