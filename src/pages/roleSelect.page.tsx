@@ -4,13 +4,16 @@ import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescript
 import { XIcon } from "lucide-react";
 
 import '../styles/roleSelect.css';
-import { Navigate, useLocation, useNavigate } from "react-router";
-import type { inputFormData } from "@/types/inputForm.type";
+import { Navigate, useNavigate } from "react-router";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { updateState } from "@/features/user/userSlice";
 
 export function RoleSelect(){
 
-    const userInfo = JSON.parse(localStorage.getItem('user') ?? '{}') as inputFormData;
+    // const userInfo = JSON.parse(localStorage.getItem('user') ?? '{}') as inputFormData;
+    const userInfo = useAppSelector((state) => state.user);
+    const dispatch = useAppDispatch();
 
     if (!userInfo){
         return <Navigate to={'/'}/>
@@ -21,8 +24,11 @@ export function RoleSelect(){
     const [value, toggleValue] = useState<string>('coach');
 
     const handleRoleSelect = () => {
-        const roleSelectedUser = Object.assign(userInfo, {role: value});
-        localStorage.setItem('user', JSON.stringify(roleSelectedUser));
+        const roleSelectedUser = {...userInfo};
+        roleSelectedUser.role = value;
+        dispatch(updateState(roleSelectedUser));
+        // const roleSelectedUser = Object.assign(userInfo, {role: value});
+        // localStorage.setItem('user', JSON.stringify(roleSelectedUser));
         navigate('/dashboard');
     }
 

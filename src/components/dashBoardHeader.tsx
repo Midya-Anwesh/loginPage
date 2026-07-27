@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 import "../styles/dashboardHeader.css";
 import { Link, Navigate, Outlet, useMatch, useNavigate } from "react-router";
-import type { inputFormData } from "@/types/inputForm.type";
 import type { dropDownGroupType, dropDownItemType } from "@/types/customDropDown.type";
 import { useMemo, useState } from "react";
 import { CustomDropDown } from "./customDropdown";
@@ -12,6 +11,10 @@ import { CustomDropDown } from "./customDropdown";
 import '../styles/profileDropdown.css';
 import { CustomAlertDialouge } from "./customAlertDialouge";
 import { UpdateProfileCard } from "./updateProfileCard"; 
+import { useAppSelector } from "@/app/hooks";
+import { useDispatch } from "react-redux";
+import { updateState } from "@/features/user/userSlice";
+import { persistor } from "@/app/store";
 
 export function DashboardHeader(){
     // First try to load entry if not found then use state object but always save the updated one
@@ -19,17 +22,19 @@ export function DashboardHeader(){
     const navigate = useNavigate();
  
     // const state: inputFormData | null = useLocation().state as inputFormData;
-    const userInfo = JSON.parse(localStorage.getItem('user') ?? 'null') as inputFormData;
+    const userInfo = useAppSelector((state) => state.user);
+    console.log('in dashboard userInfo:');
+    console.log(userInfo);
+    const dispatch = useDispatch();
 
 
     // If we are at subscription page don't show the dropdown
     const isSubscriptionPage = useMatch('/subscription');
     // console.log(isSubscriptionPage);
 
-    if((!userInfo) && (!isSubscriptionPage)){
+    if((!userInfo || (userInfo && userInfo.name.length === 0)) && (!isSubscriptionPage)){
         return <Navigate to={'/'}/>
     }
-
     const [dropdownOpen, toggleDropdownOpen] = useState(false);
     const [alertOpen, toggleAlertOpen] = useState(false);
     const [logoutAlertOpen, toggleLogoutAlertOpen] = useState(false);
@@ -39,12 +44,22 @@ export function DashboardHeader(){
     const [updateProfileCardState, toggleUpdateProfileCardState] = useState<boolean>(false);
 
     const removeSubscription = () => {
-        userInfo.subscribed = false;
-        localStorage.setItem('user', JSON.stringify(userInfo));
+        // userInfo.subscribed = false;
+        // localStorage.setItem('user', JSON.stringify(userInfo));
+        dispatch(updateState(Object.assign({...userInfo}, {subscribed: false})));
     }
 
 
-    const handleLogout = () => {localStorage.clear(), navigate('/')};
+    const handleLogout = () => {
+        dispatch(updateState({
+            role: '',
+            name: '',
+            email: '',
+            password: '',
+            subscribed: false
+        }));
+        persistor.purge().then(() => navigate('/'));
+    };
 
     const dropDownOptions = useMemo(() => {
         const groups: dropDownGroupType[] = [
@@ -148,7 +163,11 @@ export function DashboardHeader(){
             }
         </div>
 
-        { !isSubscriptionPage && <UpdateProfileCard Open={updateProfileCardState} toggleOpen={toggleUpdateProfileCardState} clsName="updateProfileDialouge" formClsName="updateProfileForm" /> }
+        { !isSubscriptionPage && <UpdateProfileCard 
+        Open={updateProfileCardState} 
+        toggleOpen={toggleUpdateProfileCardState} 
+        clsName="updateProfileDialouge" 
+        formClsName="updateProfileForm" /> }
 
         <Outlet />
         </>

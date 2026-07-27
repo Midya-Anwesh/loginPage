@@ -185,8 +185,9 @@ input:-webkit-autofill{
 
 .inputErrors{
   color: var(--error-msg-color);
-  height: 12px;
-  font-size: 15px;
+  width: fit-content;
+  height: 17px;
+  font-size: 14.5px;
   margin: 0;
 }
 
@@ -195,7 +196,7 @@ input:-webkit-autofill{
   height: 24px;
   width: 24px;
   right: 19px;
-  bottom: 32px;
+  bottom: 36px;
   background-size: 24px 24px;
   background-repeat: no-repeat;
 }

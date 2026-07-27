@@ -1,10 +1,13 @@
 import type { inputFormData } from '@/types/inputForm.type';
 import { assets } from '../assets/images';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router';
+import { useAppDispatch } from '@/app/hooks';
+import { updateState } from '@/features/user/userSlice';
 
 export function LoginFormFooter(){
 
+    const dispatch = useAppDispatch();
     const dummyInfo = useMemo(() => {
         return {
                 name: 'Dummy User',
@@ -15,8 +18,8 @@ export function LoginFormFooter(){
 
     const navigate = useNavigate();
     const handleClick = () => {
-        localStorage.setItem('user', JSON.stringify(dummyInfo));
-        navigate('/dashboard/role-select')
+        dispatch(updateState(dummyInfo));
+        navigate('/dashboard/role-select');
     }
 
     return (

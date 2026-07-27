@@ -5,7 +5,7 @@ import { maxLengthMessage, minLengthMessage, notSelectedMessage, invalidMessage,
 import { emailRegex } from '@/constants/regex';
 
 
-const valdiatePassword = (password: string) => {
+export const valdiatePassword = (password: string) => {
     if (password.length < Password.minLength){
         return minLengthMessage('password', Password.minLength);
     }

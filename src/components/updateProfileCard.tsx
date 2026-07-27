@@ -7,8 +7,11 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 import '../styles/updateProfileForm.css';
+import { useAppSelector } from "@/app/hooks";
+import { useDispatch } from "react-redux";
+import { updateState } from "@/features/user/userSlice";
 
-export type updateProfileData = Omit<inputFormData, 'role'>;
+export type updateProfileData = Partial<Omit<inputFormData, 'role'>>;
 
 type updateProfilePropType = {
     Open: boolean,
@@ -18,25 +21,31 @@ type updateProfilePropType = {
 }
 
 export function UpdateProfileCard({ Open, toggleOpen, clsName, formClsName}: updateProfilePropType){
-    const userInfo = JSON.parse(localStorage.getItem('user') ?? '{}') as inputFormData;
+    // const userInfo = JSON.parse(localStorage.getItem('user') ?? '{}') as inputFormData;
 
+    const userInfo = useAppSelector(state => state.user) as inputFormData;
+    const dispath = useDispatch();
     const [inpType, toggleType] = useState<'text'|'password'>('password');
 
     const { control, formState: {errors}, handleSubmit, reset } = useForm<updateProfileData>({
         defaultValues: {
-            name: userInfo.name,
-            email: userInfo.email,
-            password: ''
+            name: userInfo?.name??'',
+            email: undefined,
+            password: undefined
         },
         resolver: yupResolver(updateProfileSchema)
     });
 
     const onSubmit = (data: updateProfileData) => {
-        Object.assign(userInfo, data);
-        localStorage.setItem('user', JSON.stringify(userInfo));
+        // Object.assign(userInfo, data);
+        // localStorage.setItem('user', JSON.stringify(userInfo));
+        const updatedUserInfo = Object.assign({...userInfo}, data);
+        updatedUserInfo.subscribed = userInfo.subscribed ?? false;
+        dispath(updateState(updatedUserInfo));
         reset({
             name: data.name,
-            email: data.email
+            email: undefined,
+            password: undefined
         });
         toggleOpen(false);
     }

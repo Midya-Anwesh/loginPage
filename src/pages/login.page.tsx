@@ -15,21 +15,9 @@ import { useEffect, useMemo } from "react";
 
 import type { advisoryListType } from "@/types/advisoryList.type";
 import { useNavigate } from "react-router";
+import { useAppSelector } from "@/app/hooks";
 
 export function LoginPage(){
-
-    const navigate = useNavigate();
-
-    const loggedInUser = localStorage.getItem('user');
-    
-    useEffect(
-        () => {
-            if (loggedInUser){
-                navigate('/dashboard');
-            }
-        }, []
-    )
-
     const loginAdvisory = useMemo(() => {
         return [
             {
@@ -54,6 +42,18 @@ export function LoginPage(){
             }
         ] as advisoryListType['items']
     }, [])
+
+    // If user already logged in, redirect to dashboard
+    const user = useAppSelector(state => state.user);
+    const navigate = useNavigate();
+    console.log(`user from store in login page: ${JSON.stringify(user)}`);
+
+
+    useEffect(() => {
+        if (user && (user.name.length > 0)){
+            navigate('/dashboard');
+        }
+    }, [user]);
 
     return (
         <div className="loginPage">

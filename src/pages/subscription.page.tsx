@@ -15,6 +15,8 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { subscriptionValidationSchema } from "@/validation/subscriptionSelect.schema";
 import type { inputFormData } from "@/types/inputForm.type";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { updateState } from "@/features/user/userSlice";
 
 type subsCriptionSelect = {
     subscriptionPlan: string;
@@ -23,7 +25,10 @@ type subsCriptionSelect = {
 export function Subscription(){
 
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('user') ?? 'null') as inputFormData|null;
+    
+    // const user = JSON.parse(localStorage.getItem('user') ?? 'null') as inputFormData|null;
+    const user = useAppSelector((state) => state.user);
+    const dispath = useAppDispatch();
 
     const { handleSubmit, control, formState:{errors} } = useForm<subsCriptionSelect>({
         defaultValues:{
@@ -32,10 +37,11 @@ export function Subscription(){
     });
 
     const onSubmit = (data: subsCriptionSelect) => {
-        console.log(data, user);
+        
         if(user){
-            user.subscribed = true;
-            localStorage.setItem('user', JSON.stringify(user));
+            // user.subscribed = true;
+            dispath(updateState(Object.assign({...user}, {subscribed: true})));
+            // localStorage.setItem('user', JSON.stringify(user));
             navigate('/dashboard');
         }
         else{

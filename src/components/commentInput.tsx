@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
 
 import { CustomInput } from "@/components/customInput.tsx";
@@ -14,10 +14,8 @@ import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 import { CustomAlertDialouge } from './customAlertDialouge';
 
-type commentAPIResType = {
-    timeStamp: string,
-    content: string
-}
+import { useAppSelector, useAppDispatch } from '@/app/hooks';
+import { setComment } from '@/features/comment/coachCommentSlice';
 
 function CommentSectionAvatar({ initial, name }: { initial: string, name: string }){
     return(
@@ -38,10 +36,20 @@ export function CommentInput({coachName, commentId}:
 
     }
     ){
-    // load coach comment if any
-    const comment: commentAPIResType = JSON.parse(localStorage.getItem(commentId) ?? 'null')
 
-    const [coachComment, setCoachComment] = useState<commentAPIResType|null>(comment);
+    const coachCommentfromStore = useAppSelector(state => state.coachComment);
+    const dispatch = useAppDispatch();
+    console.log(`coachCommentfromStore: ${JSON.stringify(coachCommentfromStore)}`);
+
+
+    let coachComment = null;
+    if (coachCommentfromStore.hasOwnProperty(commentId)) {
+        coachComment = {
+            timeStamp: coachCommentfromStore[commentId].timeStamp,
+            content: coachCommentfromStore[commentId].content
+        }
+    }
+    
     const [isEditing, toggleEditing] = useState<boolean>(false);
     const [openDeleteAlert, toggleDeleteAlert] = useState<boolean>(false);
     
@@ -53,10 +61,12 @@ export function CommentInput({coachName, commentId}:
 
     const onSubmit = (data: commentInpType) => {
         toggleEditing(false);
-        setCoachComment({
+        dispatch(setComment({
+            coachId: commentId,
             timeStamp: currTimeStamp(),
             content: data.comment
-        });
+            
+        }));
     }
 
     const handleEditClick = () => {
@@ -66,13 +76,17 @@ export function CommentInput({coachName, commentId}:
         toggleEditing(true);
     }
 
-    // Delete the comment, change state, then useEffect will remove from localstorage
+    // Delete the comment
     const handleDelete = () => {
-        setCoachComment(null);
+        dispatch(setComment({
+            coachId: commentId,
+            timeStamp: currTimeStamp(),
+            content: null
+        }));
+
         reset({
             comment: ''
-        });
-        toggleEditing(false);
+        })
     }
 
     const currTimeStamp = () => (
@@ -87,16 +101,13 @@ export function CommentInput({coachName, commentId}:
         }).replace(',', ' ')
     )
 
-    useEffect(
-        () => localStorage.setItem(commentId, JSON.stringify(coachComment)),
-        [coachComment]
-    )
 
+    console.log(coachComment);
     return (
         <>
         <div className="commentHeader">
             Coach's Comment
-            { (coachComment || isEditing) && <div className="editDeleteOption">
+            { (coachComment || isEditing) && coachComment?.content && <div className="editDeleteOption">
                 <img className="editIcon" alt="" src={isEditing? assets.editingPencil : assets.editPen} onClick={handleEditClick}/>
                 <img className="deleteIcon bounceEffect" alt="" src={assets.commentDeleteBin} onClick={()=> toggleDeleteAlert(prev => !prev)}/>
             </div> }
@@ -105,7 +116,7 @@ export function CommentInput({coachName, commentId}:
         <div className="commentContent">
         
 
-            {(!coachComment || isEditing) &&
+            {(!coachComment || !coachComment.content || isEditing) &&
             <form className='commentForm' onSubmit={handleSubmit(onSubmit)}>
             <CommentSectionAvatar initial={coachName.charAt(0).toUpperCase()} name={coachName}/>
             <div className="commentInputWrapper">
@@ -126,7 +137,7 @@ export function CommentInput({coachName, commentId}:
             }
 
             {
-                coachComment && !isEditing &&
+                coachComment && coachComment.content && !isEditing &&
                 <Card className='commentCard'>
                     <CardHeader className='commentCardHeader'>
                         <CardTitle className='commentCardTitle'>

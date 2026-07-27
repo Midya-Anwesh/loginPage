@@ -7,6 +7,8 @@ import { CustomInput } from './customInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from '../validation/loginForm.schema';
 import { useNavigate, type ActionFunctionArgs } from 'react-router';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { updateState } from '@/features/user/userSlice';
 
 
 export const LoginFormAction = ({ request }: ActionFunctionArgs) => {
@@ -15,14 +17,17 @@ export const LoginFormAction = ({ request }: ActionFunctionArgs) => {
 
 export function LoginForm(){
 
+    // const user = useAppSelector((state) => state.user);
+    const dispatch = useAppDispatch();
+
     const naviagte = useNavigate();
     const [inpType, toggleType] = useState<"password"|"text">("password");
-    const { handleSubmit, formState: {errors}, control } = useForm<inputFormData>({
+    const { handleSubmit, formState: {errors}, control, reset } = useForm<inputFormData>({
         defaultValues: {
-            name: "",
-            email: "",
-            password: "",
-            role: ""
+            name: '',
+            role: '',
+            email: '',
+            password:''
         },
         resolver: yupResolver(loginFormSchema)
     });
@@ -42,7 +47,16 @@ export function LoginForm(){
     
 
     const onSubmit = (data: inputFormData) => {
-        localStorage.setItem('user', JSON.stringify(data));
+        // localStorage.setItem('user', JSON.stringify(data));
+        dispatch(updateState({
+            ...data
+        }));
+        reset({
+            name: '',
+            role: '',
+            password: '',
+            email: ''
+        })
         naviagte('/dashboard');
     }
 
