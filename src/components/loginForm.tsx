@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { LoginFormHeader } from './loginFormHeader';
 import { LoginFormFooter } from './loginFormFooter';
 import { useForm } from 'react-hook-form';
+import type { inputFormData } from '../types/inputForm.type';
 import type { inputFormData } from '../types/inputForm.type';
 import { CustomInput } from './customInput';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,7 +24,7 @@ export function LoginForm(){
 
     const naviagte = useNavigate();
     const [inpType, toggleType] = useState<"password"|"text">("password");
-    const { handleSubmit, formState: {errors}, control, reset } = useForm<inputFormData>({
+    const { handleSubmit, formState: {errors}, control } = useForm<inputFormData>({
         defaultValues: {
             name: '',
             role: '',
@@ -30,7 +32,22 @@ export function LoginForm(){
             password:''
         },
         resolver: yupResolver(loginFormSchema)
+        resolver: yupResolver(loginFormSchema)
     });
+
+    const roleOptions = useMemo(() => {
+        return [
+            {
+                key: 'Select your role',
+                value: ''
+            },
+            {
+                key: 'Parent',
+                value: 'parent'
+            }
+        ]
+    }, []);
+    
 
     const roleOptions = useMemo(() => {
         return [
@@ -70,6 +87,7 @@ export function LoginForm(){
         <form className='loginFormFields' onSubmit={handleSubmit(onSubmit)}>
 
             <CustomInput  
+            <CustomInput  
             control={control}
             name='role'
             errors={errors}
@@ -77,6 +95,7 @@ export function LoginForm(){
             fieldId='roleField'
             labelClass='roleLabel'
             label='Your Role'
+            options={roleOptions}
             options={roleOptions}
             />
 

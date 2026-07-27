@@ -3,6 +3,8 @@
 :root{
   --bg-color: var('--background-color');
   -webkit-link: var('--webkit-link');
+  --bg-color: var('--background-color');
+  -webkit-link: var('--webkit-link');
 }
 
 .bounceEffect{
@@ -15,10 +17,12 @@
 .squashClick:active{
   transform: translateY(2px) scale(.98);
   background-color: var(--background-color);
+  background-color: var(--background-color);
   transition: 0.1s ease-in-out;
 }
 
 input::placeholder{
+  color: var(--input-placeholder);
   color: var(--input-placeholder);
 }
 
@@ -31,10 +35,12 @@ input::placeholder{
   flex: 1;
   height: 1px;
   background-color: var(--dark-separator);
+  background-color: var(--dark-separator);
   max-width: 100%;
 }
 
 body{
+  background-color: var(--background-color);
   background-color: var(--background-color);
 }
 
@@ -53,25 +59,33 @@ input, select, button {
   gap: 24px;
   max-width: 450px;
   height: fit-content;
+  height: fit-content;
   border-radius: 10px;
   padding: 24px;
+  background-color: var(--login-form-color);
   background-color: var(--login-form-color);
 }
 
 .loginForm input, select, option{
   background-color: var(--login-form-color);
   color: var(--text-color);
+  background-color: var(--login-form-color);
+  color: var(--text-color);
 }
 select:has(option[value=""]:checked), option[value=""]{
+  color: var(--input-placeholder);
   color: var(--input-placeholder);
 }
 
 input:-webkit-autofill{
   -webkit-box-shadow: 0 0 0 1000px var(--login-form-color) inset;
   -webkit-text-fill-color: var(--text-color);
+  -webkit-box-shadow: 0 0 0 1000px var(--login-form-color) inset;
+  -webkit-text-fill-color: var(--text-color);
 }
 
 .nameLabel, .emailLabel, .passwordLabel, .roleLabel{
+  color: var(--text-color);
   color: var(--text-color);
 }
 
@@ -81,6 +95,7 @@ input:-webkit-autofill{
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 16px;
+  row-gap: 16px;
 }
 
 .formHeader > p{
@@ -89,6 +104,7 @@ input:-webkit-autofill{
   font-size: 20px;
   line-height: 100%;
   letter-spacing: 0%;
+  color: var(--text-color);
   color: var(--text-color);
 }
 
@@ -101,6 +117,7 @@ input:-webkit-autofill{
 }
 
 .important p{ 
+.important p{ 
   height: 17px;
   opacity: 1;
 
@@ -110,6 +127,7 @@ input:-webkit-autofill{
   line-height: 100%;
   letter-spacing: 0%;
 
+  color: var(--caution);
   color: var(--caution);
 
 }
@@ -139,6 +157,7 @@ input:-webkit-autofill{
   height: 48px;
   border-radius: 10px;
   border: 1px solid var(--text-color);
+  border: 1px solid var(--text-color);
   padding-left: 50px;
 }
 
@@ -156,6 +175,9 @@ input:-webkit-autofill{
   max-width: 402px;
   height: 48px;
   border-radius: 10px;
+  border: 1px solid var(--login-btn-text-color);
+  color: var(--login-btn-text-color);
+  background-color: var(--login-btn-bg-color);
   border: 1px solid var(--login-btn-text-color);
   color: var(--login-btn-text-color);
   background-color: var(--login-btn-bg-color);
@@ -229,6 +251,7 @@ input:-webkit-autofill{
     line-height: 100%;
     letter-spacing: 0%;
     color: var(--text-color);
+    color: var(--text-color);
   }
 
   .formFooterHeading::before{
@@ -237,6 +260,7 @@ input:-webkit-autofill{
     max-width: 43%;
     height: 0.75px;
     background-color: var(--login-form-footer-separator);
+    background-color: var(--login-form-footer-separator);
   }
 
   .formFooterHeading::after{
@@ -244,6 +268,7 @@ input:-webkit-autofill{
     flex: 1;
     max-width: 43%;
     height: 0.75px;
+    background-color: var(--login-form-footer-separator);
     background-color: var(--login-form-footer-separator);
   }
 }
@@ -270,6 +295,7 @@ input:-webkit-autofill{
   display: flex;
   flex-direction: column;
   gap: 36px;
+  color: var(--text-color);
   color: var(--text-color);
 }
 
@@ -334,7 +360,29 @@ input:-webkit-autofill{
   }
   to {
     transform: rotateY(360deg);
+    row-gap: 16px;
   }
+}
+
+@keyframes spin-3d {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.logo-container {
+  /* Lower numbers mean a more intense 3D effect */
+  perspective: 1000px; 
+}
+
+.spin-3d:hover {
+  animation: spin-3d 2s ease-in-out 1 forwards;
+  transform-style: preserve-3d;
+}
+
 }
 
 .logo-container {

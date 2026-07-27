@@ -1,4 +1,5 @@
 import type { inputFormData } from '@/types/inputForm.type';
+import type { inputFormData } from '@/types/inputForm.type';
 import { assets } from '../assets/images';
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router';
@@ -29,6 +30,8 @@ export function LoginFormFooter(){
             </div>
 
             <div className='formFooterLogos'>
+                <img src={assets.apple} className='logo bounceEffect squashClick' onClick={handleClick} alt=''/>
+                <img src={assets.google} className='logo bounceEffect squashClick' onClick={handleClick} alt=''/>
                 <img src={assets.apple} className='logo bounceEffect squashClick' onClick={handleClick} alt=''/>
                 <img src={assets.google} className='logo bounceEffect squashClick' onClick={handleClick} alt=''/>
             </div>
