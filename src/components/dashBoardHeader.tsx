@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { updateState } from "@/features/user/userSlice";
 import { persistor } from "@/app/store";
 
+import { UpdatePasswordForm } from "./updatePassswordForm";
+
 export function DashboardHeader(){
     // First try to load entry if not found then use state object but always save the updated one
 
@@ -42,6 +44,7 @@ export function DashboardHeader(){
     const openPlayerInvite = () => toggleAlertOpen(true);
 
     const [updateProfileCardState, toggleUpdateProfileCardState] = useState<boolean>(false);
+    const [updatePasswordCardState, toggleUpdatePasswordCardState] = useState<boolean>(false);
 
     const removeSubscription = () => {
         // userInfo.subscribed = false;
@@ -76,7 +79,7 @@ export function DashboardHeader(){
         ];
 
         const items: dropDownItemType[] = [
-            { leftIcon: assets.changePasswordIcon, itemLabel: 'Change Password' },
+            { leftIcon: assets.changePasswordIcon, itemLabel: 'Change Password', onClick: () => toggleUpdatePasswordCardState(true) },
             { 
                 leftIcon: userInfo?.subscribed ? assets.unSubscribeIcon : assets.subsCribeIcon, 
                 itemLabel: userInfo?.subscribed ? 'Unsubscribe' : 'Subscribe', 
@@ -168,6 +171,10 @@ export function DashboardHeader(){
         toggleOpen={toggleUpdateProfileCardState} 
         clsName="updateProfileDialouge" 
         formClsName="updateProfileForm" /> }
+
+        { !isSubscriptionPage && <UpdatePasswordForm 
+        Open={updatePasswordCardState} 
+        toggleOpen={toggleUpdatePasswordCardState} /> }
 
         <Outlet />
         </>
